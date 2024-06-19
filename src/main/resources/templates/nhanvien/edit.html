@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sửa Nhân viên</title>
+    <th:block th:replace="layout :: link-css"></th:block>
+</head>
+<body>
+    <header th:replace="layout :: header"></header>
+
+    <div class="container mt-4">
+        <!-- Nội dung của view edit.html -->
+        <h1>Sửa Nhân viên</h1>
+        <form th:action="@{/nhanvien/save}" th:object="${nhanVien}" method="post">
+            <input type="hidden" th:field="*{maNV}" />
+            <div class="mb-3">
+                <label for="tenNV" class="form-label">Tên NV:</label>
+                <input type="text" class="form-control" id="tenNV" th:field="*{tenNV}" required>
+            </div>
+            <div class="mb-3">
+                <label for="phai" class="form-label">Phái:</label>
+                <input type="text" class="form-control" id="phai" th:field="*{phai}" required>
+            </div>
+            <div class="mb-3">
+                <label for="noiSinh" class="form-label">Nơi sinh:</label>
+                <input type="text" class="form-control" id="noiSinh" th:field="*{noiSinh}" required>
+            </div>
+            <div class="mb-3">
+                <label for="phongBan" class="form-label">Phòng ban:</label>
+                <select class="form-control" id="phongBan" th:field="*{phongBan.maPhong}" required>
+                    <option value="">-- Chọn phòng ban --</option>
+                    <option th:each="phongBan : ${listPhongBan}" th:value="${phongBan.maPhong}" th:text="${phongBan.tenPhong}"></option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="luong" class="form-label">Lương:</label>
+                <input type="text" class="form-control" id="luong" th:field="*{luong}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+        <a href="/nhanvien" class="btn btn-secondary">Back</a>
+    </div>
+
+    <footer th:replace="layout :: footer"></footer>
+
+    <script th:replace="layout :: script"></script>
+</body>
+</html>

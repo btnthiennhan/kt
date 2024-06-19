@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Danh sách Nhân viên</title>
+    <link th:replace="layout :: link-css"></link>
+</head>
+<body>
+    <header th:replace="layout :: header"></header>
+
+    <div class="container mt-4" th:fragment="content">
+        <h1>Danh sách Nhân viên</h1>
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>Mã NV</th>
+                    <th>Tên NV</th>
+                    <th>Phái</th>
+                    <th>Nơi sinh</th>
+                    <th>Phòng ban</th>
+                    <th>Lương</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="nhanVien : ${listNhanVien}">
+                    <td th:text="${nhanVien.maNV}"></td>
+                    <td th:text="${nhanVien.tenNV}"></td>
+                    <td th:text="${nhanVien.phai}"></td>
+                    <td th:text="${nhanVien.noiSinh}"></td>
+                    <td th:text="${nhanVien.phongBan.tenPhong}"></td>
+                    <td th:text="${nhanVien.luong}"></td>
+                    <td>
+                        <a class="btn btn-primary" th:href="@{/nhanvien/edit/{maNV}(maNV=${nhanVien.maNV})}">Edit</a>
+                        <a class="btn btn-danger" th:href="@{/nhanvien/delete/{maNV}(maNV=${nhanVien.maNV})}" onclick="return confirm('Bạn có muốn xóa?')">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-success" href="/nhanvien/add">Add New</a>
+    </div>
+
+    <footer th:replace="layout :: footer"></footer>
+
+    <script th:replace="layout :: script"></script>
+</body>
+</html>
